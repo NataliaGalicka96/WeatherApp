@@ -4,5 +4,6 @@ module weatherapp {
 
 
     opens weatherapp to javafx.fxml;
+    opens weatherapp.controller;
     exports weatherapp;
 }
