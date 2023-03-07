@@ -10,29 +10,27 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="555.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weatherapp.controller.MainWindowController">
-   <padding>
-      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-   </padding>
+<AnchorPane fx:id="mainBackground" prefHeight="524.0" prefWidth="802.0" styleClass="mainBackground" stylesheets="@css/mainWindowStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weatherapp.controller.MainWindowController">
    <children>
-      <AnchorPane layoutX="16.0" layoutY="79.0" prefHeight="465.0" prefWidth="383.0" AnchorPane.topAnchor="77.0">
+      <AnchorPane layoutX="16.0" layoutY="79.0" prefHeight="446.0" prefWidth="396.0">
          <children>
-            <AnchorPane layoutX="20.0" layoutY="69.0" prefHeight="200.0" prefWidth="345.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="50.0">
+            <AnchorPane layoutX="20.0" layoutY="67.0" prefHeight="200.0" prefWidth="336.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="27.0">
                <children>
                   <ImageView fx:id="imageWeatherOfCurrentPlace" fitHeight="56.0" fitWidth="52.0" layoutX="17.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="currentDegree" layoutX="76.0" layoutY="63.0" prefHeight="56.0" prefWidth="44.0" text="Label" />
                   <Label fx:id="currentPlaceHumidity" layoutX="195.0" layoutY="34.0" prefHeight="18.0" prefWidth="65.0" text="Wilgotność" />
                   <Label fx:id="pressureCurrentPlace" layoutX="195.0" layoutY="63.0" prefHeight="18.0" prefWidth="52.0" text="Ciśnienie" />
-                  <Label fx:id="currentDescription" layoutX="17.0" layoutY="137.0" prefHeight="18.0" prefWidth="128.0" text="Zachmurzenie całkowite" />
-                  <Label fx:id="senseTemperatureCurrent" layoutX="17.0" layoutY="168.0" text="Temperatura odczuwalna" />
+                  <Label fx:id="currentDescription" layoutX="12.0" layoutY="127.0" prefHeight="18.0" prefWidth="128.0" text="Zachmurzenie całkowite" />
+                  <Label fx:id="senseTemperatureCurrent" layoutX="14.0" layoutY="154.0" text="Temperatura odczuwalna" />
                   <Label fx:id="windCurrentPlace" layoutX="195.0" layoutY="91.0" prefHeight="18.0" prefWidth="44.0" text="Wiatr" />
                   <Label fx:id="namOfCurrentPlace" layoutX="17.0" layoutY="15.0" text="Izabelin C" />
                   <Label fx:id="currentTimeInCurrentPlace" layoutX="26.0" layoutY="34.0" prefHeight="0.0" prefWidth="34.0" text="04:59" />
                </children>
             </AnchorPane>
             <Label layoutX="20.0" layoutY="284.0" text="Prognoza 5-dniowa" />
-            <ScrollPane hbarPolicy="ALWAYS" layoutX="20.0" layoutY="308.0" prefHeight="143.0" prefWidth="350.0" vbarPolicy="NEVER">
+            <ScrollPane hbarPolicy="ALWAYS" layoutX="18.0" layoutY="302.0" prefHeight="143.0" prefWidth="350.0" vbarPolicy="NEVER">
                <content>
                   <GridPane prefHeight="122.0" prefWidth="102.0">
                     <columnConstraints>
@@ -60,12 +58,18 @@
                   </GridPane>
                </content>
             </ScrollPane>
-            <Label layoutX="20.0" layoutY="28.0" prefHeight="18.0" prefWidth="75.0" text="Miejscowość:" />
-            <TextField fx:id="currentPlace" layoutX="106.0" layoutY="24.0" prefHeight="26.0" prefWidth="174.0" />
-            <Button layoutX="292.0" layoutY="25.0" mnemonicParsing="false" onAction="#searchCurrentPlace" text="Szukaj" />
+            <Label layoutX="8.0" layoutY="13.0" prefHeight="38.0" prefWidth="90.0" text="Miejscowość:">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <TextField fx:id="currentPlace" layoutX="106.0" layoutY="20.0" prefHeight="26.0" prefWidth="174.0" />
+            <Button layoutX="302.0" layoutY="20.0" mnemonicParsing="false" onAction="#searchCurrentPlace" text="Szukaj" />
          </children>
       </AnchorPane>
-      <Label fx:id="title" layoutX="354.0" layoutY="33.0" prefHeight="18.0" prefWidth="98.0" text="Prognoza pogody" />
+      <Label fx:id="title" layoutX="330.0" layoutY="24.0" prefHeight="26.0" prefWidth="163.0" text="Prognoza pogody" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
       <AnchorPane layoutX="403.0" layoutY="93.0" prefHeight="465.0" prefWidth="383.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="405.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="77.0">
          <children>
             <AnchorPane layoutX="20.0" layoutY="69.0" prefHeight="200.0" prefWidth="345.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
@@ -110,7 +114,7 @@
                   </GridPane>
                </content>
             </ScrollPane>
-            <Label layoutX="20.0" layoutY="28.0" prefHeight="18.0" prefWidth="75.0" text="Miejscowość:" />
+            <Label layoutX="13.0" layoutY="28.0" prefHeight="18.0" prefWidth="82.0" text="Miejscowość:" />
             <TextField fx:id="anotherPlace" layoutX="106.0" layoutY="24.0" prefHeight="26.0" prefWidth="174.0" />
             <Button layoutX="293.0" layoutY="25.0" mnemonicParsing="false" onAction="#searchAnotherPlace" text="Szukaj" />
          </children>
