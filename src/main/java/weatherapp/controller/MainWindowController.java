@@ -12,8 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
+import weatherapp.model.WeatherManager;
+import weatherapp.view.ViewFactory;
 
-public class MainWindowController {
+public class MainWindowController extends BaseController {
 
         @FXML
         private Label anotherDescription;
@@ -77,6 +79,10 @@ public class MainWindowController {
 
         @FXML
         private Label windCurrentPlace;
+
+        public MainWindowController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
+                super(weatherManager, viewFactory, fxmlName);
+        }
 
         @FXML
         void searchAnotherPlace(ActionEvent event) {
