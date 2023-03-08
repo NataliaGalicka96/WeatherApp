@@ -7,16 +7,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import weatherapp.model.WeatherManager;
+import weatherapp.view.ViewFactory;
 
 import java.io.IOException;
 
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.show();
+        ViewFactory viewFactory = new ViewFactory(new WeatherManager());
+        viewFactory.showMainWindow();
     }
 
     public static void main(String[] args) {
