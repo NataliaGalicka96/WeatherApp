@@ -4,7 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import weatherapp.HelloApplication;
+import weatherapp.App;
 import weatherapp.WeatherManager;
 import weatherapp.controller.BaseController;
 import weatherapp.controller.MainWindowController;
@@ -31,7 +31,7 @@ public class ViewFactory {
 
     private void initializeStage(BaseController controller){
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(controller.getFxmlName()));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(controller.getFxmlName()));
         fxmlLoader.setController(controller);
 
         Parent parent;
