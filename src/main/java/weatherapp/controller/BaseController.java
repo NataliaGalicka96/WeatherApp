@@ -4,13 +4,10 @@ import weatherapp.WeatherManager;
 import weatherapp.view.ViewFactory;
 
 public abstract class BaseController {
-    private WeatherManager weatherManager;
 
-    public String getFxmlName() {
-        return fxmlName;
-    }
+    protected WeatherManager weatherManager;
 
-    private ViewFactory viewFactory;
+    protected ViewFactory viewFactory;
 
     private String fxmlName;
 
@@ -18,5 +15,9 @@ public abstract class BaseController {
         this.weatherManager = weatherManager;
         this.viewFactory = viewFactory;
         this.fxmlName = fxmlName;
+    }
+
+    public String getFxmlName() {
+        return fxmlName;
     }
 }
