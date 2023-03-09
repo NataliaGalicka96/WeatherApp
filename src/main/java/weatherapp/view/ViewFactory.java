@@ -24,9 +24,14 @@ public class ViewFactory {
         System.out.println("Show main window controller");
 
         BaseController controller = new MainWindowController(weatherManager, this, "mainWindow.fxml");
+        initializeStage(controller);
+
+
+    }
+
+    private void initializeStage(BaseController controller){
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(controller.getFxmlName()));
-        System.out.println(fxmlLoader);
-        System.out.println(getClass().getResource(controller.getFxmlName()));
         fxmlLoader.setController(controller);
 
         Parent parent;
@@ -42,6 +47,5 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
-
     }
 }
