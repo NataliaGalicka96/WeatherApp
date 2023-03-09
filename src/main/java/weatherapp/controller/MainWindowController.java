@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.util.Duration;
-import weatherapp.model.WeatherManager;
+import weatherapp.WeatherManager;
 import weatherapp.view.ViewFactory;
 
 public class MainWindowController extends BaseController {

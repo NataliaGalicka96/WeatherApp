@@ -1,10 +1,14 @@
 package weatherapp.controller;
 
-import weatherapp.model.WeatherManager;
+import weatherapp.WeatherManager;
 import weatherapp.view.ViewFactory;
 
 public abstract class BaseController {
     private WeatherManager weatherManager;
+
+    public String getFxmlName() {
+        return fxmlName;
+    }
 
     private ViewFactory viewFactory;
 

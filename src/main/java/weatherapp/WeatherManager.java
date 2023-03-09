@@ -1,4 +1,4 @@
-package weatherapp.model;
+package weatherapp;
 
 public class WeatherManager {
 }
