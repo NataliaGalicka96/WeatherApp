@@ -94,25 +94,6 @@ public class MainWindowController extends BaseController {
 
         }
 
-        public Region mainBackground;
-        public void initialize() {
-            DoubleProperty xPosition = new SimpleDoubleProperty(0);
-            xPosition.addListener((observable, oldValue, newValue) -> setBackgroundPositions(mainBackground, xPosition.get()));
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.ZERO, new KeyValue(xPosition, 0)),
-                    new KeyFrame(Duration.seconds(500), new KeyValue(xPosition, -15000))
-            );
-            timeline.play();
-        }
-        void setBackgroundPositions(Region region, double xPosition) {
-            String style = "-fx-background-position: " +
-                    "left " + xPosition/6 + "px bottom," +
-                    "left " + xPosition/5 + "px bottom," +
-                    "left " + xPosition/4 + "px bottom," +
-                    "left " + xPosition/3 + "px bottom," +
-                    "left " + xPosition/2 + "px bottom," +
-                    "left " + xPosition + "px bottom;";
-            region.setStyle(style);
-        }
+
 
     }

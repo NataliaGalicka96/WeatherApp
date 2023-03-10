@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import weatherapp.App;
 import weatherapp.WeatherManager;
 import weatherapp.controller.BaseController;
+import weatherapp.controller.CurrentWeatherController;
 import weatherapp.controller.MainWindowController;
 
 
@@ -23,10 +24,17 @@ public class ViewFactory {
     public void showMainWindow(){
         System.out.println("Show main window controller");
 
-        BaseController controller = new MainWindowController(weatherManager, this, "mainWindow.fxml");
+        BaseController controller = new MainWindowController(weatherManager, this, "currentLocationWeatherWindow.fxml");
         initializeStage(controller);
 
 
+    }
+
+    public void showCurrentWeatherWindow(){
+        System.out.println("Show current day weather");
+
+        BaseController controller = new CurrentWeatherController(weatherManager, this, "currentLocationWeatherWindow.fxml");
+        initializeStage(controller);
     }
 
     private void initializeStage(BaseController controller){

@@ -11,7 +11,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException{
         ViewFactory viewFactory = new ViewFactory(new WeatherManager());
-        viewFactory.showMainWindow();
+        viewFactory.showCurrentWeatherWindow();
     }
 
     public static void main(String[] args) {
