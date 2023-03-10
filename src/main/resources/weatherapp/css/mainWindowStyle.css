@@ -1,9 +1,16 @@
 .mainBackground{
    /* -fx-background-size: contain, contain, contain, contain, contain, contain;
     -fx-background-position: bottom, bottom, bottom, bottom, bottom, bottom;
-    -fx-background-repeat: repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x;*/
+    -fx-background-repeat: repeat-x, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x;
     -fx-background-size: inherit;
     -fx-background-image: url("2.jpg");
+    */
 
+    -fx-background-color: rgba(39, 86, 113, 0.91);
+   /* -fx-background: linear-gradient(rgba(149,84,117,1) 0%, rgba(40,51,108,0.9865196078431373) 100%);*/
+}
 
+.days_background{
+    -fx-background-color: #43789A;
+    -fx-background-radius: 50;
 }

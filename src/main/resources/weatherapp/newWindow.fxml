@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox fx:id="body" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="868.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="250.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" top="50.0" />
+         </VBox.margin>
+         <children>
+            <VBox prefHeight="250.0" prefWidth="414.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="142.0" prefWidth="250.0" text="10:09" textFill="WHITE">
+                           <font>
+                              <Font size="96.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="68.0" text="PM" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label alignment="BOTTOM_LEFT" prefHeight="52.0" prefWidth="392.0" text="Monday, 28 December 2020" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Pane prefHeight="250.0" prefWidth="230.0" />
+            <VBox alignment="CENTER" prefHeight="250.0" prefWidth="181.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="TOP" prefHeight="61.0" prefWidth="146.0" text="Izabelin C" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="98.0" text="Polska" textFill="WHITE" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="245.0" prefWidth="868.0" styleClass="mainBackground" stylesheets="@css/mainWindowStyle.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="243.0" prefWidth="328.0">
+               <children>
+                  <ImageView fitHeight="86.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" prefHeight="243.0" prefWidth="193.0" spacing="20.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="TODAY" />
+                        <Label alignment="CENTER" prefHeight="108.0" prefWidth="111.0" text="12" textFill="WHITE">
+                           <font>
+                              <Font size="96.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="243.0" prefWidth="134.0" spacing="20.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="MONDAY" />
+                  <ImageView fitHeight="56.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="80.0" prefWidth="110.0" text="12" textFill="WHITE">
+                     <font>
+                        <Font size="64.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="330.0" layoutY="10.0" prefHeight="243.0" prefWidth="134.0" spacing="20.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="THUERSDAY" />
+                  <ImageView fitHeight="56.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="80.0" prefWidth="110.0" text="12" textFill="WHITE">
+                     <font>
+                        <Font size="64.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="464.0" layoutY="10.0" prefHeight="243.0" prefWidth="134.0" spacing="20.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="WEDNESDAY" />
+                  <ImageView fitHeight="56.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="80.0" prefWidth="110.0" text="12" textFill="WHITE">
+                     <font>
+                        <Font size="64.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="599.0" layoutY="10.0" prefHeight="243.0" prefWidth="134.0" spacing="20.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="THUESDAY" />
+                  <ImageView fitHeight="56.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="80.0" prefWidth="110.0" text="12" textFill="WHITE">
+                     <font>
+                        <Font size="64.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
