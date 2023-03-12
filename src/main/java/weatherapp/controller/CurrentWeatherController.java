@@ -1,15 +1,23 @@
 package weatherapp.controller;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import weatherapp.WeatherManager;
 import weatherapp.view.ViewFactory;
 
+
+
 public class CurrentWeatherController extends BaseController{
 
     @FXML
     private VBox body;
+    
+    @FXML
+    private TextField chooseLocation;
 
     @FXML
     private Label currentCity;
@@ -100,6 +108,13 @@ public class CurrentWeatherController extends BaseController{
 
     @FXML
     private Label temperatureNextNight1111;
+    
+    @FXML
+    void getLocation(ActionEvent event) {
+
+        System.out.println("Szukaj lokalizacji");
+
+    }
 
     public CurrentWeatherController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
         super(weatherManager, viewFactory, fxmlName);
