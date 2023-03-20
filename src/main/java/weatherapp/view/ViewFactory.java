@@ -5,11 +5,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import weatherapp.App;
-import weatherapp.WeatherManager;
 import weatherapp.controller.BaseController;
 import weatherapp.controller.CurrentWeatherController;
 import weatherapp.controller.MainWindowController;
-
+import weatherapp.model.WeatherManager;
 
 import java.io.IOException;
 

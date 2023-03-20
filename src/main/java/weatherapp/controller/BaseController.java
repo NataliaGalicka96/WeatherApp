@@ -1,6 +1,6 @@
 package weatherapp.controller;
 
-import weatherapp.WeatherManager;
+import weatherapp.model.WeatherManager;
 import weatherapp.view.ViewFactory;
 
 public abstract class BaseController {

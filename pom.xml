@@ -38,6 +38,18 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+		        <!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20230227</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
     </dependencies>
 
     <build>
