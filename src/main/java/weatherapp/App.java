@@ -5,8 +5,6 @@ import javafx.stage.Stage;
 import weatherapp.model.WeatherManager;
 import weatherapp.view.ViewFactory;
 
-import java.io.IOException;
-
 
 public class App extends Application {
 	
