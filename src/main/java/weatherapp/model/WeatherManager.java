@@ -24,7 +24,7 @@ public class WeatherManager {
 	
 	String CONTENT_TYPE = Config.CONTENT_TYPE;
 	
-	public String url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + cityName + "?unitGroup=" + UNIT_GROUP + "&key=" + YOUR_API_KEY + "&contentType=" + CONTENT_TYPE;
+	public String url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + cityName + "?unitGroup=" + UNIT_GROUP + "&key=" + YOUR_API_KEY + "&contentType=" + CONTENT_TYPE + "&lang=pl";
 	
 	public String  getUrlString() {
 		return url;
