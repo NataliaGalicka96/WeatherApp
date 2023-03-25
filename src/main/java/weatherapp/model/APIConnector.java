@@ -1,40 +1,54 @@
 package weatherapp.model;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
+
+import weatherapp.Config;
 
 public class APIConnector {
 	
-	private final String urlString;
-	
-	// urlString = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Izabelin?unitGroup=metric&key=9R52M7Z6XFEXLGT8NHVU9QYPF&contentType=json"
 
-	String myAPIKey = "";
-	String unitGroup= "metric";
+	String location;
 	
-	public APIConnector(String urlString) throws MalformedURLException {
-		this.urlString = urlString;
+	
+	public APIConnector(String location) {
+		this.location = location;
 	}
 	
-	/*
+
+	public int getResponseCode(String url) throws IOException {
+		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+		connection.setRequestMethod("GET");
+
+		//check if connect is made
+		int responseCode = connection.getResponseCode();
+		
+		return responseCode;
+	}
 	
-	public JSONArray getJSONArray(String urlString) {
+	public HttpURLConnection connect(String url) throws MalformedURLException, IOException {
+		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+		
+		connection.setRequestMethod("GET");
+		
+		
+		return connection;
+	}
+	
+	
+	public JSONObject connectToAPI(String url) {
+		
 		try {
 			
-			//try connecting to rest api
-			HttpURLConnection connection = (HttpURLConnection) new URL(urlString).openConnection();
-			connection.setRequestMethod("GET");
-
-			//check if connect is made
-			int responseCode = connection.getResponseCode();
+			HttpURLConnection connection = connect(url);
+			int responseCode = getResponseCode(url);
 			
-		
 			//System.out.println("GET Response Code :: " + responseCode);
 			
 			if (responseCode == HttpURLConnection.HTTP_OK) { // success
@@ -48,28 +62,22 @@ public class APIConnector {
 				}
 				in.close();
 				
-				//String string = response.toString();
+				String responseString = response.toString();
 				
-				//print result
-				//System.out.println(string);
-				//System.out.println(string);
+				JSONObject json = new JSONObject(responseString);
 				
-				//return string;
+				return json;
+
 			       
 			} else {
 				System.out.println("GET request did not work.");
 			}
 			
-		}catch (Exception e) {
+			
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-	
-    */
-    
- 
-	
+	}	
 	
 }
