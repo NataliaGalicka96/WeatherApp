@@ -1,6 +1,7 @@
 package weatherapp.model;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -60,6 +61,10 @@ public class WeatherManager {
 	      System.out.println(values.get("conditions"));
 	     // System.out.println(values.get("description"));
 	      
+	      ZoneId zoneId=ZoneId.of(json.getString("timezone"));
+
+			
+	      
 	      currentCity.setText(json.get("resolvedAddress").toString());
 	      currentDegree11.setText(values.get("temp").toString());
 	      currentHumidity.setText(values.get("humidity").toString());
@@ -68,23 +73,28 @@ public class WeatherManager {
 	      sensedTemperature.setText("Temperatura odczuwalna: " + values.get("feelslike").toString());
 	      description.setText(values.get("conditions").toString());
 	      
-	      ZoneId zoneId=ZoneId.of(json.getString("timezone"));
+	      
+	      
 	      JSONArray jsonArray = json.getJSONArray("days");
 	      System.out.println(jsonArray);
 			
 			System.out.println("Date\tMaxTemp\tMinTemp\tPrecip\tSource%n");
-			for (int i = 0; i < jsonArray.length(); i++) {
+			//for (int i = 0; i < jsonArray.length(); i++) {
+			for (int i = 0; i < 5; i++) {
 				JSONObject dayValue = jsonArray.getJSONObject(i);
 	            
 	            ZonedDateTime datetime=ZonedDateTime.ofInstant(Instant.ofEpochSecond(dayValue.getLong("datetimeEpoch")), zoneId);
 	            
 	            double maxtemp=dayValue.getDouble("tempmax");
 	            double mintemp=dayValue.getDouble("tempmin");
-	            double pop=dayValue.getDouble("precip");
-	            String source=dayValue.getString("source");
-	            System.out.println("%s\t%.1f\t%.1f\t%.1f\t%s%n" + " " + datetime.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + maxtemp + " " + mintemp + " " + pop + " " + source );
+
+	            System.out.println("%s\t%.1f\t%.1f\t%.1f\t%s%n" + " " + datetime.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + maxtemp + " " + mintemp );
 		
 	}
+			
+				//LocalDate customerBirthday = klient.loadBirthdayFromDatabase();
+			   LocalDate dzisiaj = LocalDate.now();
+			  System.out.println(dzisiaj);
 	
 	
 	}
