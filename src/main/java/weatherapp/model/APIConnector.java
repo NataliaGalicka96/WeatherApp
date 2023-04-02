@@ -13,13 +13,6 @@ import weatherapp.Config;
 
 public class APIConnector {
 	
-
-	String location;
-	
-	
-	public APIConnector(String location) {
-		this.location = location;
-	}
 	
 
 	public int getResponseCode(String url) throws IOException {

@@ -14,7 +14,8 @@ public class App extends Application {
 	
     @Override
     public void start(Stage stage) throws Exception{
-        ViewFactory viewFactory = new ViewFactory(new WeatherManager());
+    	String url = "";
+        ViewFactory viewFactory = new ViewFactory(new WeatherManager(url));
         viewFactory.showCurrentWeatherWindow();
     }
 

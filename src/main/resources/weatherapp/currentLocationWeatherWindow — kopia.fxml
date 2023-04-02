@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="body" 
+maxHeight="-Infinity" maxWidth="-Infinity" 
+minHeight="-Infinity" minWidth="-Infinity" 
+prefHeight="541.0" 
+prefWidth="868.0" 
+style="-fx-background-color: #000000;" 
+xmlns="http://javafx.com/javafx/11" 
+xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+         <children>
+            <TextField fx:id="chooseLocation" alignment="CENTER" prefHeight="26.0" prefWidth="297.0">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#getLocation" text="Button">
+               <HBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <ListView fx:id="cityList" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="250.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" top="50.0" />
+         </VBox.margin>
+         <children>
+            <VBox prefHeight="249.0" prefWidth="418.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="currentTime" prefHeight="142.0" prefWidth="250.0" text="10:09" textFill="WHITE">
+                           <font>
+                              <Font size="96.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="142.0" prefWidth="68.0" text="PM" textFill="WHITE">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="currentDate" alignment="BOTTOM_LEFT" prefHeight="52.0" prefWidth="392.0" text="Monday, 28 December 2020" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentCity" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="59.0" prefWidth="359.0" text="Izabelin C, Polska" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="249.0" prefWidth="210.0">
+               <children>
+                  <HBox prefHeight="134.0" prefWidth="184.0">
+                     <children>
+                        <ImageView fx:id="currentPicture1" fitHeight="69.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-weather-48.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="15.0" top="30.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="currentDegree11" alignment="CENTER" prefHeight="122.0" prefWidth="110.0" text="12" textFill="WHITE">
+                           <font>
+                              <Font size="55.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="106.0" prefWidth="184.0">
+                     <children>
+                        <Label fx:id="description" alignment="CENTER" prefHeight="28.0" prefWidth="211.0" text="Częściowe zachmurzenie" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="sensedTemperature" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="34.0" prefWidth="211.0" text="Temperatura odczuwalna: 10" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="243.0" prefWidth="130.0" spacing="20.0">
+               <children>
+                  <Label fx:id="currentPressure2" alignment="CENTER" layoutX="51.0" layoutY="86.0" prefHeight="54.0" prefWidth="155.0" text="999 hPA" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentHumidity" alignment="CENTER" layoutX="10.0" layoutY="130.0" prefHeight="54.0" prefWidth="155.0" text="999 hPA" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currentWindSpeed" alignment="CENTER" layoutX="10.0" layoutY="167.0" prefHeight="54.0" prefWidth="155.0" text="999 hPA" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox fx:id="weatherNextDay" prefHeight="245.0" prefWidth="868.0" spacing="10.0" styleClass="mainBackground" stylesheets="@css/mainWindowStyle.css">
+         <children>
+            <VBox fx:id="oneDayNext" alignment="CENTER" prefHeight="243.0" prefWidth="190.0">
+               <children>
+                  <Label fx:id="nextDayName" alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="MONDAY">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></Label>
+                  <ImageView fx:id="pictureNextDay" fitHeight="98.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox fx:id="nextTemperature" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="temperatureNextDay" alignment="CENTER" prefHeight="94.0" prefWidth="99.0" text="12" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="temperatureNextNight" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="94.0" prefWidth="99.0" text="6" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="10.0" layoutY="15.0" prefHeight="243.0" prefWidth="190.0">
+               <children>
+                  <Label fx:id="nextDayName1" alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="MONDAY">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ImageView fx:id="pictureNextDay1" fitHeight="98.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="temperatureNextDay1" alignment="CENTER" prefHeight="94.0" prefWidth="99.0" text="12" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="temperatureNextNight1" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="94.0" prefWidth="99.0" text="6" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="211.0" layoutY="15.0" prefHeight="243.0" prefWidth="190.0">
+               <children>
+                  <Label fx:id="nextDayName11" alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="MONDAY">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ImageView fx:id="pictureNextDay11" fitHeight="98.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="temperatureNextDay11" alignment="CENTER" prefHeight="94.0" prefWidth="99.0" text="12" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="temperatureNextNight11" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="94.0" prefWidth="99.0" text="6" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="412.0" layoutY="15.0" prefHeight="243.0" prefWidth="190.0">
+               <children>
+                  <Label fx:id="nextDayName111" alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="MONDAY">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ImageView fx:id="pictureNextDay111" fitHeight="98.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="temperatureNextDay111" alignment="CENTER" prefHeight="94.0" prefWidth="99.0" text="12" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="temperatureNextNight111" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="94.0" prefWidth="99.0" text="6" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="612.0" layoutY="15.0" prefHeight="243.0" prefWidth="190.0">
+               <children>
+                  <Label fx:id="nextDayName1111" alignment="CENTER" prefHeight="30.0" prefWidth="109.0" styleClass="days_background" stylesheets="@css/mainWindowStyle.css" text="MONDAY">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ImageView fx:id="pictureNextDay1111" fitHeight="98.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-weather-48.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="temperatureNextDay1111" alignment="CENTER" prefHeight="94.0" prefWidth="99.0" text="12" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="temperatureNextNight1111" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="94.0" prefWidth="99.0" text="6" textFill="WHITE">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>

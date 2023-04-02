@@ -4,6 +4,8 @@ module weatherapp {
     requires javafx.graphics;
 	requires org.json;
 	requires json.simple;
+	requires javafx.base;
+	requires ipgeolocation;
 
     opens weatherapp.controller;
     opens weatherapp.view;
