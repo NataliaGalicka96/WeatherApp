@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
@@ -13,14 +12,27 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import weatherapp.Config;
+import weatherapp.model.AutoComplete;
+import weatherapp.model.City;
+import weatherapp.model.CityHandler;
 import weatherapp.model.WeatherManager;
 import weatherapp.view.ViewFactory;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.stream.JsonReader;
 
 
 public class CurrentWeatherController extends BaseController implements Initializable{
@@ -114,43 +126,57 @@ public class CurrentWeatherController extends BaseController implements Initiali
 
 	    @FXML
 	    private VBox vbox4;
-
-    
+	    
+	    private Map<String, Integer> citiesMap;
+	    
 	    public CurrentWeatherController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
 	        super(weatherManager, viewFactory, fxmlName);
 	    }
+	    
+	    @FXML
+	    void getLocation2(ActionEvent event) throws IOException {
+	    	String cityName = chooseLocation1.getText();
+	    	System.out.print(cityName);
+	    	
+	    }
     
-    @FXML
-    void getLocation(ActionEvent event) throws IOException {
-    	
-    	hboxNextDayWeather.getChildren().clear();
-    	
-    	String cityName = "Londyn";
-    	
-    	String YOUR_API_KEY = Config.API_KEY;
-    	
-    	String UNIT_GROUP = Config.UNIT_GROUP;
-    	
-    	String CONTENT_TYPE = Config.CONTENT_TYPE;
-    	
-    	String url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + cityName + "?unitGroup=" + UNIT_GROUP + "&key=" + YOUR_API_KEY + "&contentType=" + CONTENT_TYPE + "&lang=pl";
-    	
-    	
-    	WeatherManager weatherManager = new WeatherManager(url);
-    	
-
-    	weatherManager.getWeatherData(chooseLocation, currentCity, currentDate,
-    			currentDegree11,currentHumidity, currentPicture1, currentPressure2, currentWindSpeed, description,
-sensedTemperature, weatherNextDay, hboxNextDayWeather);
-     	
-    }    
+	    @FXML
+	    void getLocation(ActionEvent event) throws IOException {
+	
+	    	
+	    	hboxNextDayWeather.getChildren().clear();
+	    	
+	    	String cityName = chooseLocation.getText();
+	    	System.out.print(cityName);
+	
+	    	
+	    	//String cityName = "Katowice";
+	    	
+	    	String YOUR_API_KEY = Config.API_KEY;
+	    	
+	    	String UNIT_GROUP = Config.UNIT_GROUP;
+	    	
+	    	String CONTENT_TYPE = Config.CONTENT_TYPE;
+	    	
+	    	String url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + cityName + "?unitGroup=" + UNIT_GROUP + "&key=" + YOUR_API_KEY + "&contentType=" + CONTENT_TYPE + "&lang=pl";
+	    	
+	    	
+	    	WeatherManager weatherManager = new WeatherManager(url);
+	    	
+	
+	    	weatherManager.getWeatherData(chooseLocation, currentCity, currentDate,
+	    			currentDegree11,currentHumidity, currentPicture1, currentPressure2, currentWindSpeed, description,
+	sensedTemperature, weatherNextDay, hboxNextDayWeather);
+	     	
+	    }    
     
 
 	public void initialize(URL location, ResourceBundle resources) {
 		
-/*
- * W tym miejscu pobrać dane obecnej lokalizacji użytkownika
- */
+		 CityHandler cityProvider2 = new CityHandler();
+		 cityProvider2.getCityListFromJsonFile(chooseLocation);
+		 cityProvider2.getCityListFromJsonFile(chooseLocation1);
+		 
 		String cityName = "Izabelin";
     	
     	String YOUR_API_KEY = Config.API_KEY;

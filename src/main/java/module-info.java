@@ -6,11 +6,19 @@ module weatherapp {
 	requires json.simple;
 	requires javafx.base;
 	requires ipgeolocation;
+	requires gson;
+	requires java.sql;
+	requires org.controlsfx.controls;
 
-    opens weatherapp.controller;
+	
+
+	
+
+    opens weatherapp.controller to javafx.fxml;
     opens weatherapp.view;
     opens weatherapp.model;
     opens weatherapp.services;
+    
    // opens weatherapp.css;
     
     exports weatherapp;

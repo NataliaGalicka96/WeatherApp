@@ -73,9 +73,9 @@ public class WeatherManager {
 	      
 	      currentCity.setText(json.get("resolvedAddress").toString());
 	      currentDegree11.setText(values.get("temp").toString());
-	      currentHumidity.setText("Wilgotność: "+ values.get("humidity").toString() + "%");
-	      currentPressure2.setText("Ciśnienie: " + values.get("pressure").toString() + "hPa");
-	      currentWindSpeed.setText("Wiatr: " + values.get("windspeed").toString() + "km/h");
+	      currentHumidity.setText("Wilgotność: "+ values.get("humidity").toString() + " %");
+	      currentPressure2.setText("Ciśnienie: " + values.get("pressure").toString() + " mbar");
+	      currentWindSpeed.setText("Wiatr: " + values.get("windspeed").toString() + " km/h");
 	      sensedTemperature.setText("Temperatura odczuwalna: " + values.get("feelslike").toString());
 	      description.setText(values.get("conditions").toString());
 	      currentPicture1.setImage(weatherImage);
@@ -143,6 +143,7 @@ public class WeatherManager {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 		        Image imageNextDay = new Image(iconNextDay);
 		        ImageView imageView1 = new ImageView(imageNextDay);
 		        imageView1.setFitHeight(70);
@@ -163,16 +164,9 @@ public class WeatherManager {
 		    	  
 			
 			}
+				
 		
 	}
 	
-	
-
-
-	
-	
-	
-
-
 
 }

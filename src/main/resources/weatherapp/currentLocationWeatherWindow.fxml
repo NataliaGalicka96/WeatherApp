@@ -29,7 +29,7 @@
                   <Insets left="80.0" top="10.0" />
                </HBox.margin>
             </TextField>
-            <Button layoutX="286.0" layoutY="20.0" mnemonicParsing="false" onAction="#getLocation" prefHeight="26.0" prefWidth="70.0" text="Button">
+            <Button layoutX="286.0" layoutY="20.0" mnemonicParsing="false" onAction="#getLocation2" prefHeight="26.0" prefWidth="70.0" text="Button">
                <HBox.margin>
                   <Insets left="50.0" right="10.0" top="10.0" />
                </HBox.margin>
