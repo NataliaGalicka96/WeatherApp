@@ -9,18 +9,18 @@ module weatherapp {
 	requires gson;
 	requires java.sql;
 	requires org.controlsfx.controls;
-
-	
-
+	requires owm.japis;
 	
 
     opens weatherapp.controller to javafx.fxml;
     opens weatherapp.view;
     opens weatherapp.model;
-    opens weatherapp.services;
+   // opens weatherapp.services;
     
    // opens weatherapp.css;
     
     exports weatherapp;
     opens weatherapp;
+
+
 }

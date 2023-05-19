@@ -7,32 +7,24 @@ import javafx.stage.Stage;
 import weatherapp.App;
 import weatherapp.controller.BaseController;
 import weatherapp.controller.CurrentWeatherController;
-import weatherapp.controller.MainWindowController;
-import weatherapp.model.WeatherManager;
-
 import java.io.IOException;
 
 public class ViewFactory {
 
-    private WeatherManager weatherManager;
+  //  private WeatherManager weatherManager;
 
+    /*
     public ViewFactory(WeatherManager weatherManager){
         this.weatherManager = weatherManager;
     }
-
-    public void showMainWindow(){
-        System.out.println("Show main window controller");
-
-        BaseController controller = new MainWindowController(weatherManager, this, "currentLocationWeatherWindow.fxml");
-        initializeStage(controller);
+    */
 
 
-    }
 
     public void showCurrentWeatherWindow(){
         System.out.println("Show current day weather");
 
-        BaseController controller = new CurrentWeatherController(weatherManager, this, "currentLocationWeatherWindow.fxml");
+        BaseController controller = new CurrentWeatherController(/*weatherManager, this,*/ "currentLocationWeatherWindow.fxml");
         initializeStage(controller);
     }
 
@@ -40,7 +32,6 @@ public class ViewFactory {
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(controller.getFxmlName()));
         fxmlLoader.setController(controller);
-
         Parent parent;
 
         try {

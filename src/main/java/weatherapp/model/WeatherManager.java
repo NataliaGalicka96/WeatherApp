@@ -1,16 +1,12 @@
 package weatherapp.model;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.time.Instant;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
-
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -19,38 +15,198 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+import net.aksingh.owmjapis.api.APIException;
+import net.aksingh.owmjapis.model.CurrentWeather;
+import net.aksingh.owmjapis.model.HourlyWeatherForecast;
+import net.aksingh.owmjapis.model.param.Weather;
+import net.aksingh.owmjapis.model.param.WeatherData;
 
 public class WeatherManager {
 	
-	
-	public String url;
-	
-	public WeatherManager(String url) {
-		super();
-		this.url = url;
+	OWMWeather owm = new OWMWeather();
+
+
+	public void getWeatherData(TextField chooseLocation, Label city, Label date,
+			Label degree, Label humidity, ImageView picture, 
+			Label pressure, Label windSpeed, Label description){
+		
+		//Wyczyścić dane znajdujące się już w widoku
+		
+		//Wybrać miasto z listy rozwijanej, pobrać wartość wybraną i podstawić zamiast "Izabelin"
+
+	       CurrentWeather cwd;
+	       
+	        try {
+	        	
+	        	cwd = owm.getCurrentWeather("Izabelin");
+				
+	        	System.out.println(cwd);
+				
+			    System.out.println(cwd.getDateTime());
+			    
+			    
+
+				city.setText(cwd.getCityName().toString());
+			    degree.setText(cwd.getMainData().getTemp().toString());
+			    pressure.setText("Ciśnienie: " + cwd.getMainData().getPressure().toString() + "hPa");
+			    humidity.setText("Wilgotność: " + cwd.getMainData().getHumidity().toString() + " %");
+			    windSpeed.setText("Wiatr: " + cwd.getWindData().getSpeed().toString() + " m/s");
+			    
+			    for (Weather data: cwd.getWeatherList()) {
+			    	
+			          	description.setText(data.getMoreInfo());
+
+			  	        Image weatherImage = new Image(cwd.getWeatherList().get(0).getIconLink());	  	    
+			  	        picture.setImage(weatherImage);
+
+			    }
+
+			  
+			          
+			} catch (APIException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
+    private DayOfWeek getDayOfWeek(Date date) {
+        LocalDate localDate = LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        return localDate.getDayOfWeek();
+    }
 
-	public void getWeatherData(TextField chooseLocation, Label currentCity, Label currentDate,
-			Label currentDegree11, Label currentHumidity, ImageView currentPicture1, 
-			Label currentPressure2, Label currentWindSpeed, Label description,
-			Label sensedTemperature, HBox weatherNextDay, HBox nextDayWeatherContainer){
-		
+    private int getHour(Date date) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        return localDateTime.getHour();
+    }
+    
+    private int getMinute(Date date) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        return localDateTime.getMinute();
+    }
+    
+	private boolean isNightTemperature(int hour) {
+        return hour > 21 || hour == 0;
+    }
+
+    private boolean isDayTemperature(int hour) {
+        return hour > 12 && hour <= 15;
+    }
+
+
+
+	public List<DailyWeatherConditions> fetchDailyWeatherForecast(String cityName) throws APIException {
+	    HourlyWeatherForecast hourlyWeatherForecast = owm.getHourlyWeather(cityName);
+	    List<DailyWeatherConditions> dailyWeatherForecast = new ArrayList<>();
 	
-		APIConnector apiConn = new APIConnector();
+	    if (hourlyWeatherForecast.hasRespCode() && hourlyWeatherForecast.getRespCode().equals("200")) {
+	        double dayTemperature = 0;
+	        double nightTemperature;
+	        WeatherData dayWeather = null;
+	
+	        for (WeatherData weatherData : hourlyWeatherForecast.getDataList()) {
+	
+	            Date date = weatherData.getDateTime();
+	           
+	            if (getDayOfWeek(new Date()) != getDayOfWeek(date)) {
+	                int hour = getHour(date);
+	
+	                if (isDayTemperature(hour)) {
+	                    dayTemperature = weatherData.getMainData().getTemp();
+	                    dayWeather = weatherData;
+	                }
+	
+	                if (isNightTemperature(hour) && dayTemperature != 0) {
+	                    nightTemperature = weatherData.getMainData().getTemp();
+	                    
+	                    DailyWeatherConditions dailyWeatherConditions = new DailyWeatherConditions(dayWeather, (int) Math.round(dayTemperature), (int) Math.round(nightTemperature));
+	                    dailyWeatherForecast.add(dailyWeatherConditions);
+	                    dayTemperature = 0;
+	                }
+	
+	                if (dailyWeatherForecast.size() == 5) {
+	                    break;
+	                }
+	            }
+	        }
+	    }
+	
+	    return dailyWeatherForecast;
+	}
+
+	public void fetchHourlyWeatherForecast(String cityName, HBox hbox) throws APIException {
+	    HourlyWeatherForecast hourlyWeatherForecast = owm.getHourlyWeather(cityName);
+	   // List<DailyWeatherConditions> dailyWeatherForecast = new ArrayList<>();
+	
+	    if (hourlyWeatherForecast.hasRespCode() && hourlyWeatherForecast.getRespCode().equals("200")) {
+	
+	
+	        for (WeatherData weatherData : hourlyWeatherForecast.getDataList()) {
+	           
+	        	Date date = weatherData.getDateTime();
+	            int date1 = getHour(date);
+	            int date2 = getMinute(date);
+	            
+	            String dateText = date1 + ":" + date2 + 0;
+	        
+	
+	            if (getDayOfWeek(new Date()) == getDayOfWeek(date)) {
+	
+	
+	            		VBox dayVBox = new VBox();
+	            		
+	                    Label dateLabel = new Label(dateText);
+	                    dateLabel.getStyleClass().add("date-label");
+	
+	                    Label temperatureLabel = new Label(weatherData.getMainData().getTemp().toString());
+	                    temperatureLabel.getStyleClass().add("bolder");
+	                    
+	                    Label pressureLabel = new Label(weatherData.getMainData().getPressure().toString());
+	                    temperatureLabel.getStyleClass().add("smaller");
+	
+	                    dayVBox.getChildren().addAll(
+	                            dateLabel,
+	                            new ImageView(new Image(weatherData.getWeatherList().get(0).getIconLink())),
+	                            temperatureLabel,
+	                            pressureLabel
+	                    );
+	                    
+	                    dayVBox.setAlignment(Pos.CENTER);
+	
+	             
+	                    hbox.getChildren().add(dayVBox);   
+	            }
+	             
+	            
+	        }
+	    }
+	
+	}
+
+}
+
 		
-		JSONObject json = apiConn.connectToAPI(url);
+	   		
+	   		
+	   		
+	   		
+	   		
 		
-	      //System.out.println(json);
-	      //System.out.println(jsonArr);
+	      		 
+	        		
+	        	 
+	       
+
+	         
+	//}
+
+	        
+/*
+		if(json != null)
+		{
 	      System.out.println(json.get("resolvedAddress"));
 	      System.out.println(json.get("address"));
 	      
 	      JSONObject values = json.getJSONObject("currentConditions");
-	      //System.out.println(values);
-	 
 	      
 	      ZoneId zoneId=ZoneId.of(json.getString("timezone"));
 
@@ -65,6 +221,8 @@ public class WeatherManager {
 	      }
 	      
 	        Image weatherImage = new Image(weatherIcon);
+	        picture.setImage(weatherImage);
+	        
 	        
 	        ImageView imageView = new ImageView(weatherImage);
 	        imageView.setFitHeight(80);
@@ -84,8 +242,6 @@ public class WeatherManager {
 	      
 	       JSONArray jsonArray = json.getJSONArray("days");
 	       
-	       //System.out.println(jsonArray);
-		   //System.out.println("Date\tMaxTemp\tMinTemp\tPrecip\tSource%n");
 			
 	       nextDayWeatherContainer.getChildren().clear();
 
@@ -166,7 +322,10 @@ public class WeatherManager {
 			}
 				
 		
+	}else {
+		System.out.println("Brak danych");
 	}
-	
-
 }
+*/
+
+

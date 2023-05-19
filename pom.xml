@@ -12,6 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.2</junit.version>
+
     </properties>
 
     <dependencies>
@@ -64,6 +65,11 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>net.aksingh</groupId>
+			<artifactId>owm-japis</artifactId>
+			<version>2.5.3.0</version>
+		</dependency>
     </dependencies>
 
     <build>
@@ -86,7 +92,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.weatherapp/com.example.weatherapp.App</mainClass>
+                            <mainClass>weatherapp/weatherapp.App</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
