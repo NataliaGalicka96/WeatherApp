@@ -11,20 +11,11 @@ import java.io.IOException;
 
 public class ViewFactory {
 
-  //  private WeatherManager weatherManager;
-
-    /*
-    public ViewFactory(WeatherManager weatherManager){
-        this.weatherManager = weatherManager;
-    }
-    */
-
-
 
     public void showCurrentWeatherWindow(){
         System.out.println("Show current day weather");
 
-        BaseController controller = new CurrentWeatherController(/*weatherManager, this,*/ "currentLocationWeatherWindow.fxml");
+        BaseController controller = new CurrentWeatherController("currentLocationWeatherWindow.fxml");
         initializeStage(controller);
     }
 
@@ -42,8 +33,10 @@ public class ViewFactory {
         }
 
         Scene scene = new Scene(parent);
+        
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setTitle("WeatherApp by Natalia Galicka");
         stage.show();
     }
 }

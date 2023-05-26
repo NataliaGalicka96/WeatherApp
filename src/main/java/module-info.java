@@ -15,9 +15,7 @@ module weatherapp {
     opens weatherapp.controller to javafx.fxml;
     opens weatherapp.view;
     opens weatherapp.model;
-   // opens weatherapp.services;
-    
-   // opens weatherapp.css;
+    opens weatherapp.css;
     
     exports weatherapp;
     opens weatherapp;

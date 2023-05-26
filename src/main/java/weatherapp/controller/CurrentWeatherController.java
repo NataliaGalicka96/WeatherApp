@@ -9,29 +9,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import net.aksingh.owmjapis.api.APIException;
+import net.aksingh.owmjapis.model.CurrentWeather;
 import weatherapp.model.City;
+import weatherapp.model.CityHandler;
 import weatherapp.model.DailyWeatherConditions;
+import weatherapp.model.HourlyWeatherConditions;
+import weatherapp.model.OWMWeather;
 import weatherapp.model.WeatherManager;
-
-
 
 public class CurrentWeatherController extends BaseController implements Initializable{
 
-	  @FXML
+	 	@FXML
 	    private VBox body;
 
-	    @FXML
-	    private HBox hourlyCurrentLocationWeather;
-	    
-	    @FXML
-	    private HBox dailyCurrentLocationWeather;
-	    
 	    @FXML
 	    private TextField chooseCurrentLocation;
 
@@ -40,9 +37,6 @@ public class CurrentWeatherController extends BaseController implements Initiali
 
 	    @FXML
 	    private Label currentCityName;
-
-	    @FXML
-	    private Label currentDate;
 
 	    @FXML
 	    private Label currentDegree;
@@ -60,16 +54,16 @@ public class CurrentWeatherController extends BaseController implements Initiali
 	    private Label currentPressure;
 
 	    @FXML
-	    private Label currentSensedTemperature;
-
-	    @FXML
 	    private Label currentWindSpeed;
 
 	    @FXML
-	    private Label desiredCityName;
+	    private ScrollPane dailyCurrentLocationWeather;
 
 	    @FXML
-	    private Label desiredDate;
+	    private ScrollPane dailyDesiredLocationWeather;
+
+	    @FXML
+	    private Label desiredCityName;
 
 	    @FXML
 	    private Label desiredDegree;
@@ -87,149 +81,210 @@ public class CurrentWeatherController extends BaseController implements Initiali
 	    private Label desiredPressure;
 
 	    @FXML
-	    private Label desiredSensedTemperature;
-
-	    @FXML
 	    private Label desiredWindSpeed;
+
+	    @FXML
+	    private ScrollPane hourlyCurrentLocationWeather;
+
+	    @FXML
+	    private ScrollPane hourlyDesiredLocationWeather;
 	    
-	    @FXML
-	    private ImageView icon;
 
-	    @FXML
-	    private Label temp;
-	    
-	    @FXML
-	    private Label clock;
-
-	    @FXML
-	    void getCurrentLocation(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void getDesiredLocation(ActionEvent event) {
-
-	    }
-	    
-	    private Map<String, Integer> citiesMap;
-
-	    private City[] cities;
-	    
 	    public CurrentWeatherController(String fxmlName) { 
-	        super(/*weatherManager, viewFactory,*/ fxmlName);
-	    }
-
-/*
-		@FXML
-	    void getDesiredLocation(ActionEvent event) throws IOException {
-	    	String cityName = chooseLocation1.getText();
-	    	System.out.print(cityName);
-	    	
+	        super(fxmlName);
 	    }
 	    
-	        
-	    @FXML
-	    void getCurrentLocation(ActionEvent event) throws IOException {
+		OWMWeather owm = new OWMWeather();
+		
+		
+		public void initialize(URL location, ResourceBundle resources) {
 
+			 CityHandler cityProvider = new CityHandler();
+			 cityProvider.getCityListFromJsonFile(chooseCurrentLocation);
+			 cityProvider.getCityListFromJsonFile(chooseDesiredLocation);
 
-	    	hboxNextDayWeather.getChildren().clear();
-	    	CityHandler cityProvider2 = new CityHandler();
-	    	citiesMap = cityProvider2.getCityListFromJsonFile(chooseLocation);
-	    	cities = cityProvider2.getCityaRRAY();
-	  
-
-	    	String cityName = chooseLocation.getText();
-	    	System.out.println(cityName);
-
-
-	    	String YOUR_API_KEY = Config.API_KEY;
-
-	    	String UNIT_GROUP = Config.UNIT_GROUP;
-
-	    	String CONTENT_TYPE = Config.CONTENT_TYPE;
-
-
-			String url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + cityName + "?unitGroup=" + UNIT_GROUP + "&key=" + YOUR_API_KEY + "&contentType=" + CONTENT_TYPE + "&lang=pl";
-
-
-	    	WeatherManager weatherManager = new WeatherManager(url);
-
-
-	    	weatherManager.getWeatherData(chooseLocation, currentCity, currentDate,
-	    			currentDegree11,currentHumidity, currentPicture1, currentPressure2, currentWindSpeed, description,
-	sensedTemperature, weatherNextDay, hboxNextDayWeather);
-
-	    }
-	    
-*/
-
-	public void initialize(URL location, ResourceBundle resources) {
-
-		/*
-		 CityHandler cityProvider2 = new CityHandler();
-		 cityProvider2.getCityListFromJsonFile(chooseLocation);
-		cityProvider2.getCityListFromJsonFile(chooseLocation1);
-		 */
-		WeatherManager weatherManager = new WeatherManager();
-    	
-				weatherManager.getWeatherData(chooseCurrentLocation, currentCityName, currentDate,
-						currentDegree,currentHumidity, currentIcon, currentPressure, currentWindSpeed, currentDescription);
-
+			String city = "Izabelin";
+			
+			CurrentWeather cwd;
+			
+			try {
 				
-				 try {
-					if (!weatherManager.fetchDailyWeatherForecast("Izabelin").isEmpty()) {
-					        setUpExtendedForecastView(weatherManager, dailyCurrentLocationWeather);
+				cwd = owm.getCurrentWeather(city);
+				
+				WeatherManager weatherManager = new WeatherManager();
+		    	
+				weatherManager.getWeatherData(chooseCurrentLocation, currentCityName,
+						currentDegree,currentHumidity, currentIcon, currentPressure, currentWindSpeed, currentDescription, cwd);
+	
+
+					if (!weatherManager.fetchDailyWeatherForecast(city).isEmpty()) {
+					        setUpExtendedForecastView(weatherManager, dailyCurrentLocationWeather, city);
 					    } else {
 					   System.out.println("Błąd");
 					    }
 					
-				} catch (APIException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 
-				 try {
-					weatherManager.fetchHourlyWeatherForecast("Izabelin", hourlyCurrentLocationWeather);
-				} catch (APIException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					if (!weatherManager.fetchHourlyWeatherForecast(city).isEmpty()) {
+						setUpHourlyForecastContainer(weatherManager, hourlyCurrentLocationWeather, city);
+					    } else {
+					   System.out.println("Błąd");
+					    }
 
+					dailyDesiredLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
+					hourlyDesiredLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
+					
+			} catch (APIException e) {
+				
+				e.printStackTrace();
+			}
+	}
 		
+	    @FXML
+	    void getDesiredLocation(ActionEvent event) {
+	    	
+	    	String city = chooseDesiredLocation.getText();
+	    	
+			try {
+				CurrentWeather cwd = owm.getCurrentWeather(city);
+				
+				WeatherManager weatherManager = new WeatherManager();
+		    	
+				weatherManager.getWeatherData(chooseDesiredLocation, desiredCityName,
+						desiredDegree,desiredHumidity, desiredIcon, desiredPressure, desiredWindSpeed, desiredDescription, cwd);
+
+
+					if (!weatherManager.fetchDailyWeatherForecast(city).isEmpty()) {
+					        setUpExtendedForecastView(weatherManager, dailyDesiredLocationWeather, city);
+					    } else {
+					   System.out.println("Brak danych dla tego miasta");
+					    }
+					
+		
+					if (!weatherManager.fetchHourlyWeatherForecast(city).isEmpty()) {
+						setUpHourlyForecastContainer(weatherManager, hourlyDesiredLocationWeather, city);
+					    } else {
+					   System.out.println("Brak danych dla tego miasta");
+					    }
+						
+			} catch (APIException e) {
+
+				e.printStackTrace();
+			}
+
+	    }
+
+	    @FXML
+	    void getCurrentLocation(ActionEvent event) {
+	    	
+	    	String city = chooseCurrentLocation.getText();
+	    	
+	    	System.out.println(city);
+	    	
+	    	
+			try {
+				CurrentWeather cwd = owm.getCurrentWeather(city);
+				
+				WeatherManager weatherManager = new WeatherManager();
+		    	
+				weatherManager.getWeatherData(chooseCurrentLocation, currentCityName,
+						currentDegree,currentHumidity, currentIcon, currentPressure, currentWindSpeed, currentDescription, cwd);
+
+
+					if (!weatherManager.fetchDailyWeatherForecast(city).isEmpty()) {
+					        setUpExtendedForecastView(weatherManager, dailyCurrentLocationWeather, city);
+					    } else {
+					   System.out.println("Błąd");
+					    }
+					
+		
+					if (!weatherManager.fetchHourlyWeatherForecast(city).isEmpty()) {
+						setUpHourlyForecastContainer(weatherManager, hourlyCurrentLocationWeather, city);
+					    } else {
+					   System.out.println("Błąd");
+					    }
+						
+			} catch (APIException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+	    }
   
-	}
 
-	private void setUpExtendedForecastView(WeatherManager weatherManager, HBox hbox ) throws APIException {
-		
-        for (DailyWeatherConditions dailyWeatherConditions : weatherManager.fetchDailyWeatherForecast("Izabelin")) {
-            
-        	VBox dayVBox = new VBox();
-
-            Label dateLabel = new Label(dailyWeatherConditions.getDate());
-            dateLabel.getStyleClass().add("date-label");
-            Label descriptionLabel = new Label(dailyWeatherConditions.getDescription());
-            descriptionLabel.getStyleClass().add("bolder");
-
-            Label temperatureLabel = new Label(dailyWeatherConditions.getTemperature());
-            temperatureLabel.getStyleClass().add("bolder");
-            Label pressureLabel = new Label(dailyWeatherConditions.getPressure());
-            temperatureLabel.getStyleClass().add("smaller");
-
-            dayVBox.getChildren().addAll(
-                    dateLabel,
-                    new ImageView(new Image(dailyWeatherConditions.getIconUrl())),
-                    descriptionLabel,
-                    temperatureLabel,
-                    pressureLabel
-            );
-            dayVBox.setAlignment(Pos.CENTER);
-
-            hbox.getChildren().add(dayVBox);
-            hbox.setSpacing(35);
-        }
-	}
-        
-      
 	
-
+	private void setUpExtendedForecastView(WeatherManager weatherManager, ScrollPane sp, String cityName) throws APIException {
+			
+			HBox hbox = new HBox();
+			
+	        for (DailyWeatherConditions dailyWeatherConditions : weatherManager.fetchDailyWeatherForecast(cityName)) {
+	           
+	        	VBox dayVBox = new VBox();
+	
+	            Label dateLabel = new Label(dailyWeatherConditions.getDateToDailyForecast());
+	            dateLabel.setStyle("-fx-font-size: 15px;");
+	
+	
+	            Label temperatureLabel = new Label(dailyWeatherConditions.getTemperature());
+	            Label pressureLabel = new Label(dailyWeatherConditions.getPressure());
+	             
+	            Image icon = new Image(dailyWeatherConditions.getIconUrl());
+	            ImageView imageView = new ImageView(icon);
+	           
+	            dayVBox.getChildren().addAll(
+	                    dateLabel,
+	                    imageView,
+	                    temperatureLabel,
+	                    pressureLabel
+	            );
+	           
+	            dayVBox.setAlignment(Pos.CENTER);
+	
+	            hbox.getChildren().add(dayVBox);
+	            hbox.setSpacing(55);
+	        }
+	        
+	        sp.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
+	        sp.setContent(hbox);
+		}
+	        
+	        
+	private void setUpHourlyForecastContainer(WeatherManager weatherManager, ScrollPane sp, String cityName ) throws APIException {
+		
+	    			HBox hbox = new HBox();
+	            
+	            	for (HourlyWeatherConditions hourlyWeatherConditions : weatherManager.fetchHourlyWeatherForecast(cityName)) {
+	                
+		            	
+	            		VBox dayVBox = new VBox();
+		
+		                Label dateLabel = new Label(hourlyWeatherConditions.getDateToHourlyForecast());
+		                dateLabel.setStyle("-fx-font-size: 15px;");
+		
+		                Label temperatureLabel = new Label(hourlyWeatherConditions.getTemperature());
+		                
+		                Label pressureLabel = new Label(hourlyWeatherConditions.getPressure());
+	
+		                Image icon = new Image(hourlyWeatherConditions.getIconUrl());
+		                ImageView imageView = new ImageView(icon);
+		                imageView.autosize();
+		                
+		                dayVBox.getChildren().addAll(
+		                        dateLabel,
+		                        imageView,
+		                        temperatureLabel,
+		                        pressureLabel
+		                );
+		               
+		                dayVBox.setAlignment(Pos.CENTER);
+		
+		                hbox.getChildren().add(dayVBox);
+		                hbox.setSpacing(45);
+	                   
+	            }
+	            
+	            sp.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
+	            sp.setContent(hbox);
+	            
+		}
+	        
 }

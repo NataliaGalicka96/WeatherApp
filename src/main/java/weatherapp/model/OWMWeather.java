@@ -9,7 +9,7 @@ import weatherapp.Config;
 public class OWMWeather {
 
 	private final OWM weatherMap;
-	
+
 	public OWMWeather() {
 		weatherMap = new OWM(Config.OWM_API_KEY);
 		weatherMap.setUnit(OWM.Unit.METRIC);

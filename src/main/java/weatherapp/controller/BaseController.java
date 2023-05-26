@@ -5,9 +5,7 @@ public abstract class BaseController {
 
     private String fxmlName;
 
-    public BaseController(/*WeatherManager weatherManager, ViewFactory viewFactory, */String fxmlName) {
-      //  this.weatherManager = weatherManager;
-       // this.viewFactory = viewFactory;
+    public BaseController(String fxmlName) {
         this.fxmlName = fxmlName;
     }
 

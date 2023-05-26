@@ -12,7 +12,6 @@ public class DailyWeatherConditions extends WeatherBase {
         super(
                 dayWeather.getDateTime(),
                 dayWeather.getMainData().getPressure(),
-                dayWeather.getWeatherList().get(0).getMainInfo(),
                 dayWeather.getWeatherList().get(0).getIconLink()
         );
         this.dayTemperature = dayTemperature;
