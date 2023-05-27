@@ -1,7 +1,10 @@
 target/
+out/
+*.class
 *.classpath
 *.project
 *.log
+Config.java
 bin/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
