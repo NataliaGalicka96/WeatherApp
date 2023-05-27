@@ -1,10 +1,7 @@
-.body {
-    
-}
 
 .mainBackground{
     -fx-background-color: #120907;
--fx-font-family: 'Poppins Medium';
+	-fx-font-family: 'Poppins Medium';
 }
 
 .weather-container {
@@ -18,7 +15,8 @@
 }
 
 .cityLabel {
--fx-text-fill: white;
+	-fx-text-fill: white;
+	-fx-background-radius: 25;
 }
 
 .button {
@@ -27,126 +25,5 @@
     -fx-text-fill: white;
 }
 
-/*
-.date{
--fx-font-size : 5px;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  font-weight: 400;
-  src: url('fonts/Poppins-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Poppins';
-  font-weight: 500;
-  src: url('fonts/Poppins-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Poppins';
-  font-weight: 600;
-  src: url('fonts/Poppins-SemiBold.ttf') format('truetype');
-}
-
-@font-face{
-  font-family: 'Poppins';
-  font-weight: 700;
-  src: url('fonts/Poppins-Bold.ttf') format('truetype');
-}
-
-#main-pane {
-    -fx-background-image: url('img/weather.png');
-    -fx-background-repeat: repeat;
-    -fx-background-size: auto;
-    -fx-background-position: left top, bottom right;
-    -fx-font-family: 'Poppins Medium';
-}
-
-.city {
-    -fx-font-size: 25;
- 	-fx-text-fill: #919191;
-}
-
-.label {
-    -fx-text-fill: #919191;
-    -fx-font-size: 13;
-}
-
-.scroll-pane {
-    -fx-background:  #1e1e36;
-    -fx-background-radius: 20;
-    -fx-border-color: #1e1e36;
--fx-border-radius: 20;
-}
-
-.split-pane, .split-pane-divider {
-    -fx-background-color: transparent;
-}
-
-.weather-container {
-    -fx-background-color:  #1e1e36;
-    -fx-background-radius: 20;
-}
-
-.title {
-    -fx-font-size: 16;
-    -fx-font-family: 'Poppins SemiBold';
-    -fx-text-fill: #64738f;
-}
-
-.date-label {
-    -fx-font-family: 'Poppins SemiBold';
-    -fx-text-fill: #4682b4;
-    -fx-font-size: 14;
-}
-
-#temperature-label {
-    -fx-font-size: 44;
-    -fx-font-family: 'Poppins Regular';
-    -fx-text-fill: #636363;
-}
-
-#location-label {
-    -fx-font-family: 'Poppins SemiBold';
-    -fx-text-fill: #4682b4;
-    -fx-font-size: 16;
-}
-
-.bolder {
-    -fx-font-family: 'Poppins SemiBold';
-    -fx-text-fill: #787878;
-
-}
-
-.smaller {
-    -fx-font-size: 12;
-}
-
-#description-label {
-    -fx-font-family: 'Poppins SemiBold';
-    -fx-text-fill: #787878;
-    -fx-font-size: 14;
-}
-
-.error {
-    -fx-font-family: 'Poppins Medium';
-    -fx-text-fill: #f2304e;
-    -fx-font-size: 14;
-}
-
-#logo {
-    -fx-font-family: 'Poppins SemiBold';
-    -fx-text-fill: #64738f;
-    -fx-font-size: 42;
-}
 
 
-
-.text-field {
-    -fx-background-radius: 30;
-    -fx-text-fill: #787878;
-}
-
-*/
