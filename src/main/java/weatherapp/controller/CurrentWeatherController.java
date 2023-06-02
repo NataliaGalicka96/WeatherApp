@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import net.aksingh.owmjapis.api.APIException;
@@ -89,6 +90,12 @@ public class CurrentWeatherController extends BaseController implements Initiali
 	    @FXML
 	    private ScrollPane hourlyDesiredLocationWeather;
 	    
+	    @FXML
+	    private GridPane currentWeather;
+	    
+	    @FXML
+	    private GridPane desiredWeather;
+	    
 
 	    public CurrentWeatherController(String fxmlName) { 
 	        super(fxmlName);
@@ -116,7 +123,7 @@ public class CurrentWeatherController extends BaseController implements Initiali
 				weatherManager.getWeatherData(chooseCurrentLocation, currentCityName,
 						currentDegree,currentHumidity, currentIcon, currentPressure, currentWindSpeed, currentDescription, cwd);
 	
-
+					/*
 					if (!weatherManager.fetchDailyWeatherForecast(city).isEmpty()) {
 					        setUpExtendedForecastView(weatherManager, dailyCurrentLocationWeather, city);
 					    } else {
@@ -129,9 +136,16 @@ public class CurrentWeatherController extends BaseController implements Initiali
 					    } else {
 					   System.out.println("Błąd");
 					    }
-
+					 */
+					dailyCurrentLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
+					hourlyCurrentLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
+					Label currentLabel = new Label("Wybierz miasto, aby zobaczyć prognozę pogody");
+					hourlyCurrentLocationWeather.setContent(currentLabel);
+					
 					dailyDesiredLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
 					hourlyDesiredLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
+					Label desiredLabel = new Label("Wybierz miasto, aby zobaczyć prognozę pogody");
+					hourlyDesiredLocationWeather.setContent(desiredLabel);
 					
 			} catch (APIException e) {
 				
@@ -193,14 +207,14 @@ public class CurrentWeatherController extends BaseController implements Initiali
 					if (!weatherManager.fetchDailyWeatherForecast(city).isEmpty()) {
 					        setUpExtendedForecastView(weatherManager, dailyCurrentLocationWeather, city);
 					    } else {
-					   System.out.println("Błąd");
+					    	 System.out.println("Brak danych dla tego miasta");
 					    }
 					
 		
 					if (!weatherManager.fetchHourlyWeatherForecast(city).isEmpty()) {
 						setUpHourlyForecastContainer(weatherManager, hourlyCurrentLocationWeather, city);
 					    } else {
-					   System.out.println("Błąd");
+					    	 System.out.println("Brak danych dla tego miasta");
 					    }
 						
 			} catch (APIException e1) {
