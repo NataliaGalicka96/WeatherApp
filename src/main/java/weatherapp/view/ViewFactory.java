@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import weatherapp.App;
 import weatherapp.controller.BaseController;
-import weatherapp.controller.CurrentWeatherController;
+import weatherapp.controller.MainWindowController;
 import java.io.IOException;
 
 public class ViewFactory {
@@ -15,7 +15,7 @@ public class ViewFactory {
     public void showCurrentWeatherWindow(){
         System.out.println("Show current day weather");
 
-        BaseController controller = new CurrentWeatherController("currentLocationWeatherWindow.fxml");
+        BaseController controller = new MainWindowController("currentLocationWeatherWindow.fxml");
         initializeStage(controller);
     }
 
@@ -37,6 +37,7 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("WeatherApp by Natalia Galicka");
+        stage.setResizable(false);
         stage.show();
     }
 }

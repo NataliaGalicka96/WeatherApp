@@ -5,17 +5,18 @@ module weatherapp {
 	requires org.json;
 	requires json.simple;
 	requires javafx.base;
-	requires ipgeolocation;
 	requires gson;
 	requires java.sql;
 	requires org.controlsfx.controls;
 	requires owm.japis;
-	
+	requires com.fasterxml.jackson.databind;
+	requires java.desktop;
+
 
     opens weatherapp.controller to javafx.fxml;
     opens weatherapp.view;
     opens weatherapp.model;
-    opens weatherapp.css;
+    //opens weatherapp.css;
     
     exports weatherapp;
     opens weatherapp;
