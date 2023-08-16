@@ -12,14 +12,14 @@ import java.io.IOException;
 public class ViewFactory {
 
 
-    public void showCurrentWeatherWindow(){
+	public void showCurrentWeatherWindow(){
         System.out.println("Show current day weather");
 
         BaseController controller = new MainWindowController("currentLocationWeatherWindow.fxml");
         initializeStage(controller);
     }
 
-    private void initializeStage(BaseController controller){
+    void initializeStage(BaseController controller){
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(controller.getFxmlName()));
         fxmlLoader.setController(controller);

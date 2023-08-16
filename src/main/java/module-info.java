@@ -12,7 +12,6 @@ module weatherapp {
 	requires com.fasterxml.jackson.databind;
 	requires java.desktop;
 
-
     opens weatherapp.controller to javafx.fxml;
     opens weatherapp.view;
     opens weatherapp.model;

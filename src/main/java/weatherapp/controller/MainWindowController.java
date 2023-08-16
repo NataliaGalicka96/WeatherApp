@@ -2,7 +2,10 @@ package weatherapp.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
+import java.util.function.BooleanSupplier;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +19,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import net.aksingh.owmjapis.api.APIException;
+import weatherapp.model.AutoComplete;
 import weatherapp.model.CityHandler;
+import weatherapp.model.CityHandlerStare;
 import weatherapp.model.DailyWeatherConditions;
 import weatherapp.model.HourlyWeatherConditions;
 import weatherapp.model.WeatherService;
@@ -94,6 +99,8 @@ public class MainWindowController extends BaseController implements Initializabl
 	    
 	    @FXML
 	    private Label desiredLabel;
+	    
+	    Map<String, Integer> citiesMap = new TreeMap<>();
 
 	    public MainWindowController(String fxmlName) { 
 	        super(fxmlName);
@@ -107,8 +114,18 @@ public class MainWindowController extends BaseController implements Initializabl
 			weatherService = WeatherServiceFactory.createWeatherService();
 			
 			 CityHandler cityProvider = new CityHandler();
-			 cityProvider.getCityListFromJsonFile(chooseCurrentLocation);
-			 cityProvider.getCityListFromJsonFile(chooseDesiredLocation);
+			 
+			 try {
+				citiesMap = cityProvider.getCityListFromJsonFile("city.list.min.json");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+			 AutoComplete.autoComplete(chooseCurrentLocation, citiesMap);
+			 AutoComplete.autoComplete(chooseDesiredLocation, citiesMap);
+			 //cityProvider.getCityListFromJsonFile(chooseCurrentLocation);
+			// cityProvider.getCityListFromJsonFile(chooseDesiredLocation);
 
 			dailyCurrentLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
 			hourlyCurrentLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
@@ -264,6 +281,8 @@ public class MainWindowController extends BaseController implements Initializabl
 	            sp.setContent(hbox);
 	            
 		}
+
+
 	
 	        
 }

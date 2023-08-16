@@ -1,5 +1,40 @@
 package weatherapp.model;
 
+
+
+import net.aksingh.owmjapis.model.param.WeatherData;
+
+public class DailyWeatherConditions extends WeatherBase {
+
+    private final int dayTemperature;
+    private final int nightTemperature;
+
+    public DailyWeatherConditions(WeatherData dayWeather, int dayTemperature, int nightTemperature) {
+        super(dayWeather.getDateTime(), dayWeather.getMainData().getPressure(), dayWeather.getWeatherList().get(0).getIconLink());
+        this.dayTemperature = dayTemperature;
+        this.nightTemperature = nightTemperature;
+    }
+
+    public String getTemperature() {
+        return dayTemperature + "\u00b0" + "/" + nightTemperature + "\u00b0";
+    }
+
+    public int getDayTemperature() {
+        return dayTemperature;
+    }
+
+    public int getNightTemperature() {
+        return nightTemperature;
+    }
+}
+
+
+
+
+
+
+
+/*
 import net.aksingh.owmjapis.model.param.WeatherData;
 
 public class DailyWeatherConditions extends WeatherBase {
@@ -22,3 +57,4 @@ public class DailyWeatherConditions extends WeatherBase {
         return dayTemperature + "\u00b0" + "/" + nightTemperature + "\u00b0";
     }
 }
+*/
