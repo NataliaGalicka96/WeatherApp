@@ -12,6 +12,9 @@ import java.io.IOException;
 public class ViewFactory {
 
 
+	public Stage stage;
+	public FXMLLoader fxmlLoader;
+
 	public void showCurrentWeatherWindow(){
         System.out.println("Show current day weather");
 

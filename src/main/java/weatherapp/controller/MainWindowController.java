@@ -5,8 +5,6 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
-import java.util.function.BooleanSupplier;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +19,6 @@ import javafx.scene.layout.VBox;
 import net.aksingh.owmjapis.api.APIException;
 import weatherapp.model.AutoComplete;
 import weatherapp.model.CityHandler;
-import weatherapp.model.CityHandlerStare;
 import weatherapp.model.DailyWeatherConditions;
 import weatherapp.model.HourlyWeatherConditions;
 import weatherapp.model.WeatherService;
@@ -118,14 +115,13 @@ public class MainWindowController extends BaseController implements Initializabl
 			 try {
 				citiesMap = cityProvider.getCityListFromJsonFile("city.list.min.json");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.out.println("Nie udało się pobrać listy miast z pliku");
 				e.printStackTrace();
 			}
 			 
 			 AutoComplete.autoComplete(chooseCurrentLocation, citiesMap);
 			 AutoComplete.autoComplete(chooseDesiredLocation, citiesMap);
-			 //cityProvider.getCityListFromJsonFile(chooseCurrentLocation);
-			// cityProvider.getCityListFromJsonFile(chooseDesiredLocation);
+
 
 			dailyCurrentLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");
 			hourlyCurrentLocationWeather.setStyle("-fx-background:  #1e1e36; -fx-background-radius: 20; -fx-border-color: #1e1e36; -fx-border-radius: 20; ");

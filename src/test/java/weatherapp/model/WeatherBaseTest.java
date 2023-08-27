@@ -1,6 +1,8 @@
 package weatherapp.model;
 
-import static junit.framework.Assert.assertEquals;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 
 import java.util.Date;
@@ -24,7 +26,7 @@ public class WeatherBaseTest {
 	String dateString = weatherBase.getDateToHourlyForecast();
 	
 	//then
-	assertEquals(dateString, "14:00");
+	assertThat(dateString, equalTo("14:00"));
 
 	}
 	
@@ -36,7 +38,7 @@ public class WeatherBaseTest {
 		String dateString = weatherBase.getDateToDailyForecast();
 		
 		//then
-		assertEquals(dateString, "Niedz., 13 sie");
+		assertThat(dateString, equalTo("Niedz., 13 sie"));
 		
 	}
 	
@@ -48,7 +50,7 @@ public class WeatherBaseTest {
 		String pressureAfterFormat = weatherBase.getPressure();
 		
 		//then
-		assertEquals(pressureAfterFormat, "1005 hPa");
+		assertThat(pressureAfterFormat, equalTo("1005 hPa"));
 		
 	}
 	
@@ -58,7 +60,7 @@ public class WeatherBaseTest {
 		//when
 		int hour = weatherBase.getHour(date);
 		//then
-		assertEquals(hour, 14);
+		assertThat(hour, equalTo(14));
 	}
 	
 	@Test
@@ -67,7 +69,7 @@ public class WeatherBaseTest {
 		//when
 		int hour = weatherBase.getMinute(date);
 		//then
-		assertEquals(hour, 0);
+		assertThat(hour, equalTo(0));
 	}
 	
 	

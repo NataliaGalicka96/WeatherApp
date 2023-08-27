@@ -1,41 +1,29 @@
 package weatherapp.model;
 
-
 import org.junit.jupiter.api.Test;
 
 import weatherapp.model.client.OpenWeatherMapClient;
 import weatherapp.model.client.WeatherClient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WeatherServiceFactoryTest {
-
-	/*
-    @Test
-    void testCreateWeatherService() {
-        // Arrange
-        WeatherClient weatherClientMock = mock(WeatherClient.class);
-        WeatherServiceFactory weatherServiceFactorySpy = spy(new WeatherServiceFactory());
-
-        // Symulowanie zachowania metody createWeatherClient()
-        doReturn(weatherClientMock).when(weatherServiceFactorySpy).createWeatherClient();
-
-        // Act
-        WeatherService weatherService = weatherServiceFactorySpy.createWeatherService();
-
-        // Assert
-        assertEquals(weatherClientMock, weatherService.getWeatherClient());
-    }
     
-    */
+
 
     @Test
     void testCreateWeatherClient() {
-        // Act
+        //given
         WeatherClient weatherClient = WeatherServiceFactory.createWeatherClient();
 
-        // Assert
+        //then
         assertEquals(OpenWeatherMapClient.class, weatherClient.getClass());
+        assertThat(weatherClient.getClass(), equalTo(OpenWeatherMapClient.class));
     }
 }
+
+/*
+Sprawdzamy, czy metoda createWeatherCLient() zwraca oczekiwany typ klasy OpenWeatherMapClient
+*/
