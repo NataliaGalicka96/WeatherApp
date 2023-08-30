@@ -1,14 +1,14 @@
 package weatherapp.model;
-
+import net.aksingh.owmjapis.model.param.Main;
+import net.aksingh.owmjapis.model.param.Weather;
 import net.aksingh.owmjapis.model.param.WeatherData;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.Collections;
 import java.util.Date;
 
 public class DailyWeatherConditionsTest {
@@ -18,26 +18,31 @@ public class DailyWeatherConditionsTest {
         //given
     	Date date = new Date(123,7,13,14,0);
     	double pressure = 1013.2;
+        String iconLink = "http://example.com/icon.png";
         int dayTemperature = 25;
         int nightTemperature = 18;
 
         WeatherData weatherDataMock = mock(WeatherData.class);
-
+        Main mainDataMock = mock(Main.class);
+        Weather weatherMock = mock(Weather.class);
 
         when(weatherDataMock.getDateTime()).thenReturn(date);
-        when(weatherDataMock.getMainData().getPressure()).thenReturn(pressure);
-
+        when(weatherDataMock.getMainData()).thenReturn(mainDataMock);
+        when(weatherDataMock.getWeatherList()).thenReturn(Collections.singletonList(weatherMock));
+        when(mainDataMock.getPressure()).thenReturn(pressure);
+        when(weatherMock.getIconLink()).thenReturn(iconLink);
 
         //when
         DailyWeatherConditions dailyWeatherConditions = new DailyWeatherConditions(weatherDataMock, dayTemperature, nightTemperature);
 
         //then
 
-        assertThat(dailyWeatherConditions.getTemperature(), equalTo(dayTemperature + "\u00b0" + "/" + nightTemperature + "\u00b0"));
-        assertThat(dailyWeatherConditions.getDayTemperature(), equalTo(dayTemperature));
-        assertThat(dailyWeatherConditions.getNightTemperature(), equalTo(nightTemperature));
-        
-        assertThat(dailyWeatherConditions.getPressure(), equalTo((int)pressure + " hPa"));
-        
+        assertEquals((int)pressure + " hPa", dailyWeatherConditions.getPressure());
+        assertEquals(dayTemperature + "\u00b0" + "/" + nightTemperature + "\u00b0", dailyWeatherConditions.getTemperature());
     }
 }
+
+/*
+Tworzymy mocki klas: WeatherData, Main, Weather), aby testować konstruktor klasy DailyWeatherConditions. 
+Następnie weryfikujemy, czy konstruktor ustawia pola poprawnie oraz czy metoda getTemperature() zwraca oczekiwany wynik.
+*/
