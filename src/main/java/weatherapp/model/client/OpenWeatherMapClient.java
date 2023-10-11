@@ -146,7 +146,6 @@ public class OpenWeatherMapClient implements WeatherClient {
 
     public DayOfWeek getDayOfWeek(Date date) {
         LocalDate localDate = LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
-        System.out.println(localDate);
         return localDate.getDayOfWeek();
     }
 
