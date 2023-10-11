@@ -9,8 +9,10 @@ import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
 import net.aksingh.owmjapis.model.CurrentWeather;
 import net.aksingh.owmjapis.model.HourlyWeatherForecast;
+import net.aksingh.owmjapis.model.param.Main;
 import net.aksingh.owmjapis.model.param.Weather;
 import net.aksingh.owmjapis.model.param.WeatherData;
+import net.aksingh.owmjapis.model.param.Wind;
 import weatherapp.model.DailyWeatherConditions;
 import weatherapp.model.HourlyWeatherConditions;
 
@@ -26,8 +28,9 @@ public class OpenWeatherMapClient implements WeatherClient {
 
     private final OWM weatherMap;
 
-    public OpenWeatherMapClient() {
-        weatherMap = new OWM(OWMClientConfig.OWM_API_KEY);
+    public OpenWeatherMapClient(OWM owm) {
+    	this.weatherMap = owm;
+        //weatherMap = new OWM(OWMClientConfig.OWM_API_KEY);
         weatherMap.setUnit(OWM.Unit.METRIC);
         weatherMap.setLanguage(OWM.Language.POLISH);
     }
@@ -39,29 +42,52 @@ public class OpenWeatherMapClient implements WeatherClient {
 
         CurrentWeather cwd = weatherMap.currentWeatherByCityName(chooseLocation.getText());
 
-        city.setText(cwd.getCityName());
-        city.getStyleClass().add("city");
-        degree.setText((int) Math.round(cwd.getMainData().getTemp()) + "\u00b0");
-        pressure.setText("Ciśnienie: " + (int) Math.round(cwd.getMainData().getPressure()) + " hPa");
-        humidity.setText("Wilgotność: " + (int) Math.round(cwd.getMainData().getHumidity()) + " %");
+        if (cwd != null) {
+            String cityName = cwd.getCityName();
+            if (cityName != null) {
+                city.setText(cityName);
+                city.getStyleClass().add("city");
+            }
 
-        Weather weatherData = cwd.getWeatherList().get(0);
-        String descriptionText = weatherData.getMoreInfo();
-        description.setText(descriptionText.substring(0, 1).toUpperCase() + descriptionText.substring(1));
+            Main mainData = cwd.getMainData();
+            if (mainData != null) {
+                double temperature = mainData.getTemp();
+                degree.setText((int) Math.round(temperature) + "\u00b0");
 
-        Image weatherImage = new Image(weatherData.getIconLink());
-        picture.setFitHeight(150);
-        picture.setFitWidth(150);
-        picture.setImage(weatherImage);
+                double pressureValue = mainData.getPressure();
+                pressure.setText("Ciśnienie: " + (int) Math.round(pressureValue) + " hPa");
 
-        windSpeed.setText("Wiatr: " + (int) Math.round(cwd.getWindData().getSpeed()) + " m/s");
+                double humidityValue = mainData.getHumidity();
+                humidity.setText("Wilgotność: " + (int) Math.round(humidityValue) + " %");
+            }
+
+            List<Weather> weatherList = cwd.getWeatherList();
+            if (weatherList != null && !weatherList.isEmpty()) {
+                Weather weatherData = weatherList.get(0);
+                String descriptionText = weatherData.getMoreInfo();
+                if (descriptionText != null) {
+                    description.setText(descriptionText.substring(0, 1).toUpperCase() + descriptionText.substring(1));
+                } else {
+                    description.setText("Brak danych");
+                }
+                String iconLink = weatherData.getIconLink();
+                if (iconLink != null) {
+                    Image weatherImage = new Image(iconLink);
+                    picture.setFitHeight(150);
+                    picture.setFitWidth(150);
+                    picture.setImage(weatherImage);
+                }
+
+            }
+
+            Wind windData = cwd.getWindData();
+            if (windData != null) {
+                double windSpeedValue = windData.getSpeed();
+                windSpeed.setText("Wiatr: " + (int) Math.round(windSpeedValue) + " m/s");
+            }
+        }
     }
 
-    @Override
-    public boolean checkCity(String cityName) {
-        // TODO: Implement city check logic
-        return false;
-    }
 
     @Override
     public List<HourlyWeatherConditions> getHourlyForecast(String cityName) throws APIException {
@@ -95,7 +121,7 @@ public class OpenWeatherMapClient implements WeatherClient {
 
             for (WeatherData weatherData : hourlyWeatherForecast.getDataList()) {
                 Date date = weatherData.getDateTime();
-
+               
                 if (getDayOfWeek(new Date()) != getDayOfWeek(date)) {
                     int hour = getHour(date);
 
@@ -120,6 +146,7 @@ public class OpenWeatherMapClient implements WeatherClient {
 
     public DayOfWeek getDayOfWeek(Date date) {
         LocalDate localDate = LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        System.out.println(localDate);
         return localDate.getDayOfWeek();
     }
 
@@ -134,5 +161,16 @@ public class OpenWeatherMapClient implements WeatherClient {
 
  public boolean isDayTemperature(int hour) {
         return hour > 12 && hour <= 15;
+    }
+
+    @Override
+    public boolean checkCity(String cityName) {
+        // TODO Auto-generated method stub
+        if(cityName!=null){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }

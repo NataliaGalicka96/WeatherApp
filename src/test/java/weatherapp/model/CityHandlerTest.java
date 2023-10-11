@@ -19,7 +19,6 @@ public class CityHandlerTest {
         //given
         CityHandler cityHandler = new CityHandler();
         Map<String, Integer> citiesMap = new TreeMap<>();
-        
 
         //when
         citiesMap = cityHandler.getCityListFromJsonFile("city.list.min.json");

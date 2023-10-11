@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class WeatherServiceTest {
 
     @Test
-    void testConstructorAndGetWeatherClient() {
+    void shouldReturnWeatherClient() {
         //Given
         WeatherClient weatherClientMock = mock(WeatherClient.class);
 

@@ -1,4 +1,5 @@
 package weatherapp.model;
+
 import net.aksingh.owmjapis.model.param.Main;
 import net.aksingh.owmjapis.model.param.Weather;
 import net.aksingh.owmjapis.model.param.WeatherData;
@@ -14,7 +15,7 @@ import java.util.Date;
 public class DailyWeatherConditionsTest {
 
     @Test
-    void testConstructorAndGetTemperature() {
+    void shouldSetCorrectlyValueForDailyWeather() {
         //given
     	Date date = new Date(123,7,13,14,0);
     	double pressure = 1013.2;
@@ -41,8 +42,3 @@ public class DailyWeatherConditionsTest {
         assertEquals(dayTemperature + "\u00b0" + "/" + nightTemperature + "\u00b0", dailyWeatherConditions.getTemperature());
     }
 }
-
-/*
-Tworzymy mocki klas: WeatherData, Main, Weather), aby testować konstruktor klasy DailyWeatherConditions. 
-Następnie weryfikujemy, czy konstruktor ustawia pola poprawnie oraz czy metoda getTemperature() zwraca oczekiwany wynik.
-*/

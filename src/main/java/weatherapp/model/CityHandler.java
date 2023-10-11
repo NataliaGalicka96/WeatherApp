@@ -27,7 +27,7 @@ public class CityHandler {
            inputStream = new FileInputStream("D:\\WeatherApp\\src\\main\\resources\\weatherapp\\"+Config.CITY_LIST_WITH_DATA);
         }  catch (FileNotFoundException e) {
         	e.printStackTrace();
-       	System.out.println("Problem z wczytaniem pliku");
+       	    System.out.println("Problem z wczytaniem pliku");
         }
 					            
         JsonReader reader = null;

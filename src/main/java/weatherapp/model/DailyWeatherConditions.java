@@ -20,11 +20,4 @@ public class DailyWeatherConditions extends WeatherBase {
         return dayTemperature + "\u00b0" + "/" + nightTemperature + "\u00b0";
     }
 
-    public int getDayTemperature() {
-        return dayTemperature;
-    }
-
-    public int getNightTemperature() {
-        return nightTemperature;
-    }
 }

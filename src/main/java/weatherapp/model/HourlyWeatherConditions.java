@@ -15,8 +15,6 @@ public class HourlyWeatherConditions extends WeatherBase {
         return temperature + "\u00b0";
     }
 
-    public int getHourlyTemperature() {
-        return temperature;
-    }
+
 }
 

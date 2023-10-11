@@ -1,6 +1,5 @@
 package weatherapp.controller;
 
-
 public abstract class BaseController {
 
     private String fxmlName;

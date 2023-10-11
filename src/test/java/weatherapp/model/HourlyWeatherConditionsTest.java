@@ -17,7 +17,7 @@ import java.util.Date;
 public class HourlyWeatherConditionsTest {
 
     @Test
-    void testConstructorAndGetTemperature() {
+    void shouldSetCorrectlyValueForHourlyWeather() {
 
     	//given
     	Date date = new Date(123,7,13,14,0);
@@ -40,7 +40,6 @@ public class HourlyWeatherConditionsTest {
         HourlyWeatherConditions hourlyWeatherConditions = new HourlyWeatherConditions(weatherDataMock, temperature);
 
         //then
-
         assertThat(hourlyWeatherConditions.getTemperature(), equalTo(temperature + "\u00b0"));
         assertThat(hourlyWeatherConditions.getPressure(), equalTo((int)pressure + " hPa"));
         

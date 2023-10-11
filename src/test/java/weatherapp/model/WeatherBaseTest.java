@@ -31,7 +31,7 @@ public class WeatherBaseTest {
 	}
 	
 	@Test
-	void shouldReturnCorectlyFormatOfDateTest() {
+	void shouldReturnCorrectlyFormatOfDateTest() {
 		
 		//given
 		//when
@@ -43,7 +43,7 @@ public class WeatherBaseTest {
 	}
 	
 	@Test
-	void shouldReturnCorectlyFormatOfPressureTest() {
+	void shouldReturnCorrectlyFormatOfPressureTest() {
 		
 		//given
 		//when
@@ -55,7 +55,7 @@ public class WeatherBaseTest {
 	}
 	
 	@Test
-	void shoulReturnHourFromDate() {
+	void shouldReturnHourFromDate() {
 		//given
 		//when
 		int hour = weatherBase.getHour(date);
@@ -71,9 +71,5 @@ public class WeatherBaseTest {
 		//then
 		assertThat(hour, equalTo(0));
 	}
-	
-	
-	
-	
 
 }

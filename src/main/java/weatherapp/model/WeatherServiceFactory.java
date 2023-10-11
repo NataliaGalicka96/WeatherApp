@@ -1,5 +1,7 @@
 package weatherapp.model;
 
+import net.aksingh.owmjapis.core.OWM;
+import weatherapp.model.client.OWMClientConfig;
 import weatherapp.model.client.OpenWeatherMapClient;
 import weatherapp.model.client.WeatherClient;
 
@@ -16,7 +18,9 @@ public class WeatherServiceFactory {
 	}
 
 	public static WeatherClient createWeatherClient() {
-		return new OpenWeatherMapClient();
+		return new OpenWeatherMapClient(new OWM(OWMClientConfig.OWM_API_KEY));
 	}
 	
 }
+
+

@@ -27,9 +27,7 @@ import weatherapp.model.client.WeatherClient;
 
 public class MainWindowController extends BaseController implements Initializable{
 	
-	
-	 	@FXML
-	    private VBox body;
+
 
 	    @FXML
 	    private TextField chooseCurrentLocation;
